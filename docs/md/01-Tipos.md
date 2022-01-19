@@ -75,28 +75,28 @@ También llamados atómicos, puesto que son las unidades más pequeñas con las 
 
 > **Nota importante<sup>1</sup>:** El tipo de datos `String` NO ES una variable de tipo primitivo. Ya se verá más adelante a fondo. La incluimos aquí porque podemos catalogarla como **básica** e incluirla “moralmente” entre los tipos primitivos, aunque técnicamente no lo sea.
 
-Una vez que ya hemos visto las variables, sus posibles tipos de datos, y la sintaxis para declarar e inicializar variables, veamos nuestras primeras líneas de código real en Java, dónde definimos una variable de cada tipo:
+Una vez que ya hemos visto las variables, sus tipos de datos, y la sintaxis para declarar e inicializar variables, veamos nuestras primeras líneas de código real en Java, dónde definimos una variable de cada tipo:
 
 ```java
 //Booleanas
-boolean esCorrecto = true;    //true o false
+boolean esCorrecto = true; 	//true o false
 
 //Enteros
-byte b = 127; 				//entre -128 y 127
+byte b = 127;				//entre -128 y 127
 short s = 32767;			//entre -32768 y 32767
-int i = 2147483647;      	 //tipo entero
-long l = 2150000000L;        //tipo entero largo;
+int i = 2147483647;			//tipo entero
+long l = 2150000000L;		//tipo entero largo;
 
 //Decimales
-float f = (float) 7.5;		 //tipo float (decimal con simple precisión)
+float f = (float) 7.5;		//tipo float (decimal con simple precisión)
 double d = 9.573;			//tipo double (decimal con doble precisión)
 
 //char
-char letra1 = 'A';  		//Los char se pueden tratar indistintamente como un carácter 
-char letra2 = 65;		    //o como un número
+char letra1 = 'A';			//Los char se pueden tratar indistintamente como un carácter 
+char letra2 = 65;			//o como un número
 char letra3 = 'B' + 1;		//Esto NO DARÍA B1, si no 'C'
 
-//String 
+//String
 String curso = "Desarrollador/a Fullstack"; //No sería un primitivo, pero casi ;)
 ```
 
@@ -170,10 +170,10 @@ En el ejemplo anterior, ambos resultados dan decimales, porque ya no estamos div
 Veamos otra posibilidad:
 
 ```java
-float division1 = 5 / 2;   		//Daría 2, y se guardaría 2.0
-float division2 = 5 / 2.0; 		//Error
-float division3 = 5 / 2f;  		//Funcionaría
-float division4 = 5 / (float) 2 //Funcionaría
+float division1 = 5 / 2;		//Daría 2, y se guardaría 2.0
+float division2 = 5 / 2.0;		//Error
+float division3 = 5 / 2f;		//Funcionaría
+float division4 = 5 / (float) 2;//Funcionaría
 ```
 
 - Línea 1: Dividimos `5 / 2`, ambos enteros, el resultado es entero, y al guardarse en un `float`, se guardaría `2.0`.
@@ -218,7 +218,7 @@ String cadena5 = 1 + 2 + 3;     //Daría error, no puede meter un int en un Stri
 
 # Entrada y salida de datos
 
-## Salida
+## Salida por pantalla
 
 Para mostrar información por la consola, usaremos la función `System.out.println();`
 
@@ -227,7 +227,7 @@ String saludo = "Hola Mundo!";
 System.out.println(saludo);
 ```
 
-Dicha función imprimirá el resultado de la expresión, y al final un salto de línea.
+Dicha función imprimirá el resultado de la expresión, y un salto de línea al final.
 
 Hay una versión que no imprimirá ningún salto de línea al final, que es `System.out.print();`. 
 
@@ -244,9 +244,78 @@ Hola
 Mundo
 ```
 
-## Entrada
+### Colores  🌈
 
-{{Pendiente de explicar el Scanner}}
+Es posible imprimir colores por la consola de Eclipse.
+
+{{próximamente}}
 
 
+
+## Entrada por teclado
+
+Para leer datos desde teclado en un programa java, usaremos la clase `Scanner`. Primero instanciaremos un nuevo objeto de la clase `Scanner`.
+
+```java
+Scanner teclado = new Scanner(System.in); //Creamos un objeto Scanner
+```
+
+> **Nota:** La clase `Scanner` está en el paquete `java.util`. Deberemos importar el paquete para poder usar la clase.
+
+Una vez creado el objeto Scanner, usaremos sus métodos para pedir el tipo de dato que necesitemos por teclado:
+
+```java
+int edad = teclado.nextInt();
+float media = teclado.nextFloat();
+double valor = teclado.nextDouble();
+String nombre = teclado.nextLine();
+```
+
+Cada vez que llamemos a un método de los anteriores, la ejecución de la aplicación se detendrá y esperará a que introduzcamos un valor por la consola. Al pulsar intro se terminará la lectura por teclado, el valor recogido será devuelto por el método, y se asignará en la variable.
+
+No es necesario crear nuevas instancias de la clase Scanner, podemos reutilizar la misma todas las veces que necesitemos. En nuestro ejemplo, es el objeto llamado `teclado`.
+
+### Buffer de teclado
+
+Al pedir datos por teclado, se van almacenando los caracteres pulsados en un *buffer* (memoria intermedia). Al usar los métodos `.nextInt()`, `.nextDouble()`, `.nextLine()`, etc., lo que hacen es extraer *tokens* (trozos) de ese buffer. 
+
+Cada método extraerá lo que está buscando y lo devolverá. Pero tenemos un efecto curioso. Veamos la siguiente secuencia.
+
+1. Al usar el método `.nextLine()`, se abre el buffer e introducimos `Max Power` y pulsamos intro, por lo que en el buffer habrá <kbd>Max Power\n</kbd>. El método extraerá todos los caracteres que encuentre hasta el `/n` y los devolverá en formato `String`.
+1. Hasta aquí todo normal y controlado. Pero pidamos ahora un número.
+2. Al usar el método `.nextInt()` (o cualquiera para números), se abre el buffer e introducimos `1234` y pulsamos intro, en el buffer habrá <kbd>1234\n</kbd>. El método extrae el siguiente número que encuentre en el buffer y lo devuelve con el tipo pedido (`int`, `double` o `float`). **Dejando el resto del buffer intacto**. Es decir, dejaría en su interior un <kbd>\n</kbd> residual.
+3. Si en el buffer queda un <kbd>\n</kbd>, y volvemos a hacer un `.nextLine()`, tendremos un efecto inesperado. El método irá al buffer y como no está vacío, no se detiene a pedirnos nada, extrae el <kbd>\n</kbd> y sigue con la ejecución del programa.
+
+**Problema:** Resumiendo, **después de hacer** un `.nextInt()`, `.nextDouble()` o `.nextFloat()`, **si hacemos un** `.nextLine()`, el primero lo ignorará (los sucesivos si funcionarán). Si primero pedimos el `.nextLine()` y después el `.nextInt/Float/Double()`, no existirá problemas, por lo explicado anteriormente.
+
+**Solución:** Si pedimos un número, y después queremos pedir un String (es importante que sea en ese orden), necesitaremos limpiar el buffer tras pedir el número, haciendo:
+
+```java
+teclado.nextLine();
+```
+
+No es necesario que guardemos el resultado en ninguna variable (podemos dejar que se vaya al cielo de los `String`). Ejecutando esa línea, cuando hagamos el `.nextLine()` que necesitemos, se detendrá como debe, ya que el buffer estará vacío.
+
+Aquí un ejemplo de todo lo explicado, secuencialmente:
+
+```java
+Scanner teclado = new Scanner(System.in);
+System.out.println("Introduce tu edad y tu nombre, en ese orden:");
+int edad = teclado.nextInt();  		//Se detiene para introducir una edad
+String nombre = teclado.nextLine();	//Se lo salta, porque en el buffer quedó un \n de antes
+String apodo = teclado.nextLine();	//Se detiene, porque el buffer ya se vació en la línea anterior
+```
+
+Y como podemos solucionarlo:
+
+```java
+Scanner teclado = new Scanner(System.in);
+System.out.println("Introduce tu edad y tu nombre, en ese orden:");
+int edad = teclado.nextInt();  		//Se detiene para introducir una edad
+teclado.nextLine();					//Limpiamos el buffer, ya que había un \n
+String nombre = teclado.nextLine();	//Se detiene, porque el buffer ya está vacío
+String apodo = teclado.nextLine();	//Se detiene de nuevo, porque el buffer está vacío
+```
+
+> **🤓:** También podemos solucionarlo pidiendo los `String` en primer lugar, y después los números. O bien usando una nueva instancia de la clase `Scanner`, la cual tenga un buffer vacío.
 
