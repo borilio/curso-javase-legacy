@@ -12,11 +12,11 @@
 
 Esta independencia, tanto del sistema operativo como del dispositivo, ha contribuido a expandir el lenguaje, y a que numerosos fabricantes de software hayan apostado por el, y que a día de hoy siga siendo la principal opción para numerosas empresas y programadores a la hora realizar sus desarrollos.
 
-# Máquina Virtual de Java (JVM)
+# JDK y JRE
 
 {{Próximamente}}
 
-# JDK y JRE
+# Máquina Virtual de Java (JVM)
 
 {{Próximamente}}
 
@@ -32,10 +32,10 @@ En programación, una variable está formada por un espacio en memoria y un nomb
 
 - Deben empezar por una letra y en minúscula. En Java se usa la notación camelCase.
 - Pueden contener números, pero no podrán empezar por un número.
-- No pueden usarse tildes, ni signos, ni caracteres especiales.
+- No pueden usarse tildes, ni signos de puntuación, ni caracteres especiales.
 - No podrán usarse palabras reservadas para el lenguaje.
 - Identificadores válidos serían: `contador`, `contador3`, `c`, `x2`, `contadorVocales`.
-- Identificadores no válidos serían: `1contador`, `123`, `c%`, `x-y`, `?min`, `año`, `spidermán`.
+- Identificadores no válidos serían: `1contador`, `123`, `c%`, `x-y`, `?min`, `año`, `spidermán`. (Realmente si funcionaría la ñ y las tildes, pero nos provocarán muchos errores futuros, así que mejor tratarlos como no válidos.)
 
 Para **definir una variable** (también llamado declarar) de un tipo de dato concreto, se usará la sintaxis siguiente:
 
@@ -246,9 +246,47 @@ Mundo
 
 ### Colores  🌈
 
-Es posible imprimir colores por la consola de Eclipse.
+Es posible imprimir colores por la consola de Java en STS4. Tan sólo tendremos que imprimir un `String` concreto con un código de color y a partir de ese carácter imprimirá todo el texto en dicho color. A continuación la lista con los códigos de color y un ejemplo para imprimir un color concreto:
 
-{{próximamente}}
+```java
+//Lista de colores disponibles
+String black = "\033[30m";
+String red = "\033[31m"; 
+String green = "\033[32m"; 
+String yellow = "\033[33m"; 
+String blue = "\033[34m"; 
+String purple = "\033[35m"; 
+String cyan = "\033[36m"; 
+String white = "\033[37m";
+String reset = "\u001B[0m";
+
+System.out.print(reset); //Ponemos el color por defecto
+System.out.println("Este texto sale con el color por defecto...");
+System.out.print(blue); //A partir de aquí imprimimos en azul
+System.out.print("Este texto ya sale en azul");
+```
+![Consola colores1](img/01/01.png) 
+
+> **Nota:** Si cambiamos los colores, permanecerán activos hasta que se reseteen. Por lo que sería una buena práctica imprimir siempre al inicio del programa el color `\u001B[0m` (como hacemos en la línea 12 del ejemplo) para que no empezara a escribir con un color inesperado.
+
+Aunque lo más fácil es guardar los códigos en variables para después imprimirlas cuando queramos, también podemos imprimir los códigos como parte de un String.
+
+```java
+System.out.print("\033[30m NEGRO");
+System.out.print("\033[31m ROJO");
+System.out.print("\033[32m VERDE");
+System.out.print("\033[33m AMARILLO");
+System.out.print("\033[34m AZUL");
+System.out.print("\033[35m MAGENTA");
+System.out.print("\033[36m CYAN");
+System.out.print("\033[37m BLANCO");
+```
+
+![Consola colores2](img/01/02.png)
+
+También es posible cambiar el color de fondo y algunos estilos básicos como negrita o cursiva, aunque dependerá de la compatibilidad de la versión de Eclipse respecto a los códigos ANSI. 
+
+La lista completa de códigos de escape para los colores ANSI la puedes encontrar en el siguiente enlace: https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 
 
 
@@ -274,6 +312,10 @@ String nombre = teclado.nextLine();
 Cada vez que llamemos a un método de los anteriores, la ejecución de la aplicación se detendrá y esperará a que introduzcamos un valor por la consola. Al pulsar intro se terminará la lectura por teclado, el valor recogido será devuelto por el método, y se asignará en la variable.
 
 No es necesario crear nuevas instancias de la clase Scanner, podemos reutilizar la misma todas las veces que necesitemos. En nuestro ejemplo, es el objeto llamado `teclado`.
+
+### Cerrar teclado
+
+{{Pendiente}}
 
 ### Buffer de teclado
 
