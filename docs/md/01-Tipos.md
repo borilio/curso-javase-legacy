@@ -216,6 +216,20 @@ String cadena5 = 1 + 2 + 3;     //Daría error, no puede meter un int en un Stri
 
 
 
+## Constantes
+
+Una constante en Java es una variable que su valor no podrá ser modificado después de su inicialización. A todos los efectos funciona exactamente igual que una variable, con la diferencia que si intentamos asignarle un valor cualquiera, una vez que ya tenga su valor inicial, provocará un error de compilación y el propio IDE nos indicará el error.
+
+Las constantes se declaran igual que las variables, teniendo en cuenta dos puntos:
+
+- Hay que añadirle el modificador `final` antes del tipo de dato, sea el que sea.
+- Por convención, el identificador de una constante, se escribirá entero en mayúsculas. Si tiene varias palabras, se usará guion bajo para separarlas.
+
+```java
+final double PI = 3.141592653589793;
+final String COLOR_ROJO = "\033[31m";
+```
+
 # Entrada y salida de datos
 
 ## Salida por pantalla
