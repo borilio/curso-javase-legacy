@@ -248,15 +248,15 @@ while (condición) {
 ```java
 int x=0;
 while (x<10) {
-    x++;
     System.out.println(x);
+    x++;
 }
 ```
 
 1. Primero inicializamos la variable `x` al valor `0`. 
 2. Evaluamos la expresión `x<10`. Si su valor es `true`, entramos en el bucle, si no salta todas las instrucciones y seguiría por la línea 5 (o punto 6 de esta lista).
-3. Sumamos un 1 a `x`.
-4. Imprimimos el valor de `x`.
+3. Imprimimos el valor de `x`.
+4. Sumamos un 1 a `x`.
 5. Y volvemos al punto 2.
 6. Fin.
 
