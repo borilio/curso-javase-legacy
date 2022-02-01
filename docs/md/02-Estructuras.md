@@ -10,7 +10,7 @@
 
 Cada línea que escribimos en un programa es una instrucción. Estas instrucciones pueden ser:
 
-- **Declaraciones:** Sirven definir (crear) una variable o funciones en un programa.
+- **Declaraciones:** Sirven para definir (crear) una variable o funciones en un programa.
 - **Primitivas**: Son acciones sobre los datos de los programas. A su vez puede ser:
   - **De asignación:** Cuando asignamos un valor a una variable.
   - **De Entrada o Salida (E/S):** Cuando mostramos una expresión por pantalla o leemos por teclado. La pantalla y el teclado son las E/S estándar, pero podría ser cualquier otro dispositivo.

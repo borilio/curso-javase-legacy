@@ -111,6 +111,6 @@ System.out.println("¡¡¡Hola Mundo!!!");
 
 En este punto, ya podemos pasar a ejecutar la aplicación. Tenemos varias formas de ejecutar una aplicación Java. Empecemos con una y después iremos viendo más.
 
-1.  Pulsar **botón derecho sobre la carpeta de nuestro proyecto** (no sobre el archivo `Principal.java`, sin sobre la carpeta `demo-holamundo`). Nos aparecerá un menú contextual y seleccionamos ***Run As… -> Java Application***.
+1.  Pulsar **botón derecho sobre la carpeta de nuestro proyecto** (no sobre el archivo `Principal.java`, sino sobre la carpeta `demo-holamundo`). Nos aparecerá un menú contextual y seleccionamos ***Run As… -> Java Application***.
 2. Veremos que nos aparecerá una ventana con la consola de Java. Ahí es dónde veremos el resultado de ejecutar nuestra aplicación Java.
 ![Consola](img/00/06.png)

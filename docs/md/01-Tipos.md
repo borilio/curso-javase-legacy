@@ -71,7 +71,7 @@ También llamados atómicos, puesto que son las unidades más pequeñas con las 
 | Decimal simple     | `float`     | Define una variable real estándar.                           | 4 bytes | [±3,4·10<sup>-38</sup> … ±3,4·10<sup>38</sup>]     |
 | Decimal doble      | `double`    | Define una variable real con doble precisión. Ocupa el doble que `float` en memoria. | 8 bytes | [±1,7·10<sup>-308</sup> ... ±1,7·10<sup>308</sup>] |
 | Carácter           | `char`      | Define una variable que podrá almacenar un único carácter o su código ASCII. Se delimita con comillas simples. Ejemplo: `'a'`. | 2 bytes | [0 .. 65.535]                                      |
-| String<sup>1</sup> | `String`    | Defina una variable que podrá almacenar una cadena de caracteres. Se delimita con comillas dobles. Ejemplo: `"Hola Mundo"`. |         |                                                    |
+| String<sup>1</sup> | `String`    | Define una variable que podrá almacenar una cadena de caracteres. Se delimita con comillas dobles. Ejemplo: `"Hola Mundo"`. |         |                                                    |
 
 > **Nota importante<sup>1</sup>:** El tipo de datos `String` NO ES una variable de tipo primitivo. Ya se verá más adelante a fondo. La incluimos aquí porque podemos catalogarla como **básica** e incluirla “moralmente” entre los tipos primitivos, aunque técnicamente no lo sea.
 
@@ -329,7 +329,15 @@ No es necesario crear nuevas instancias de la clase Scanner, podemos reutilizar 
 
 ### Cerrar teclado
 
-{{Pendiente}}
+Si no cerramos el teclado, se produce una fuga de recursos y los editores nos pueden avisar con un `warning`, por lo que podemos cerrarlo para evitar dicho aviso. Para cerrar el teclado usaremos el método `.close()` de la clase `Scanner`.
+
+```java
+Scanner teclado = new Scanner(System.in);
+...
+teclado.close(); // Lo cerramos cuando ya no vamos a usarlo
+```
+
+> **Nota:** Si cerramos el objeto scanner y después lo intentamos usar, provocará una 
 
 ### Buffer de teclado
 
