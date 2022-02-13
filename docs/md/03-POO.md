@@ -119,17 +119,17 @@ Veamos un poco más…
 
 ```java
 public class Main {
-	public static void main (String[] args) {
-		//Instanciamos un objeto de la clase Vehículo
+    public static void main (String[] args) {
+        //Instanciamos un objeto de la clase Vehículo
         Vehiculo coche = new Vehiculo();
-		//Le damos valores a sus atributos
+        //Le damos valores a sus atributos
         coche.ruedas = 4;
         coche.color = "Verde";
         coche.motor = "TDI 2.1";
         //Usamos sus métodos
         coche.arrancar();
         System.out.println("Aceleramos: " + coche.acelerar(10));
-	}
+    }
 }
 ```
 
@@ -227,20 +227,20 @@ Por ejemplo, para encapsular el atributo potencia en la clase Coche, y proporcio
 
 ```java
 public class Coche {
-	//Atributo potencia
+    //Atributo potencia
     private int potencia;
-	
+
     //Getter del atributo potencia
-	public int getPotencia(){
-		return potencia;
-	}
-	
+    public int getPotencia(){
+        return potencia;
+    }
+
     //Setter del atributo potencia
-	public void setPotencia(int valor){
-		if (valor >= 0) {		//Así nunca tendrá valores negativos
-			potencia = valor;
+    public void setPotencia(int valor){
+        if (valor >= 0) {		//Así nunca tendrá valores negativos
+            potencia = valor;
         }
-	}
+    }
 }
 ```
 
@@ -321,7 +321,7 @@ Hemos visto la teoría. Pasemos a la práctica. Hagamos la clase anterior `Vehí
 
 ```java
 public class Vehiculo {
-	//Atributos
+    //Atributos
     private int numeroRuedas;
     private String color;
 
@@ -349,15 +349,107 @@ Al instanciar un objeto de la clase `Coche`, podremos comprobar fácilmente que 
 
 > 👀 En la captura podemos comprobar que el objeto `coche` tiene los métodos de `Vehiculo` y `Coche`, pero no podremos acceder DIRECTAMENTE a los atributos, ya que son privados (tanto los propios como los heredados). Desde el interior de la clase `Coche` podremos acceder a los atributos propios usando `this`, y a los heredados usando los *getters* y *setters*, ya que estos si son públicos. Si los atributos heredados (`color` y `numeroRuedas`) no tuvieran los *getters* ni *setters* y/o no fueran públicos, no tendríamos acceso a los atributos heredados de ninguna forma.
 
-**Los constructores no se heredan**. Cada clase tendrá sus propios constructores. Aunque hay una posibilidad de llamar a los métodos de la superclase (incluidos los constructores). Para hacer referencia a los métodos de la superclase, se podrá usar la palabra reservada <kbd>super</kbd>. De la misma forma que con `this` hacemos referencia a los atributos y métodos de ESTA clase, con `super` hacemos referencia a los atributos y métodos de la clase padre (o superclase). Se entenderá mejor el concepto en el siguiente apartado: La sobrescritura.
+**Los constructores no se heredan**. Cada clase tendrá sus propios constructores. Aunque hay una posibilidad de llamar a los métodos de la superclase (incluidos los constructores). 
+
+Para hacer referencia a los métodos de la superclase, se podrá usar la palabra reservada <kbd>super</kbd>. De la misma forma que con `this` hacemos referencia a los atributos y métodos de ESTA clase, con `super` hacemos referencia a los atributos y métodos de la clase padre (o superclase). Se entenderá mejor el concepto en el siguiente apartado: La sobrescritura.
 
 
 
 ## Sobrescritura de métodos
 
-{{TODO por aquí}}
+Cuando una clase hereda los métodos de la superclase, la implementación de los mismos no siempre de ajustan a los requerimientos de la clase hija. Puede ocurrir que algunos de los métodos heredados deba ser redefinido en la nueva clase para poder cumplir mejor con su funcionalidad.
+
+Por ejemplo, si tenemos definida la clase `Vehículo`, la cual tiene implementado un método `acelerar()`, y ahora creamos la clase `Helicóptero`  la cual hereda de `Vehículo`, deberíamos sobrescribir el método `acelerar()`, ya que tal y como está definido en la clase `Vehículo`, no sería válido para la clase `Helicóptero`, y tendría que volver a definirse en la misma.
+
+![sobrescritura](img/03/09.png)
+
+A esta redefinición de métodos heredados en la subclase se le conoce como **sobrescritura de métodos** y su objetivo es **volver a definir en la subclase un método heredado**, respetando el formato original del mismo. Esto significa que el nuevo método tiene que tener exactamente **el mismo nombre, parámetros definidos y valor devuelto definidos en la superclase**. Lo único que podrá modificarse es el modificador de acceso del método, pudiendo ser menor restrictivo que el de la superclase. Por ejemplo, el método sobrescrito puede ser público mientras que el heredado sea privado.
+
+Cuando se hace referencia al método `acelerar()` de la clase Helicóptero, ya no se ejecutará el método heredado `acelerar()` de la superclase Vehículo, si no el que se haya redefinido en la subclase usando la sobrescritura de métodos. Si se hubiese definido el método `acelerar()` de una forma distinta a la que está descrita, por ejemplo, recibiendo más de un parámetro en lugar de ninguno, no produciría ningún error, ya que se trataría de un caso válido de **sobrecarga** de métodos (lo siguiente 😉), pero dejaría de ser **sobrescritura**.
 
 ## Sobrecarga de métodos
 
+La sobrecarga de métodos consiste en la posibilidad de **definir más de un método con el mismo nombre** dentro de una clase. La sobrecarga de métodos simplifica la utilización de las clases por parte de los programadores puesto que permite disponer de distintas versiones de una operación respetando el mismo nombre de método en todas ellas.
+
+Un ejemplo de sobrecarga sería el de una clase que realizara operaciones matemáticas en la que la suma de números se pudiera realizar de diferentes formas, por ejemplo, una que lo hiciera a partir de los parámetros recibidos, otra a partir de los atributos de la clase y otra que sumara el contenido de una lista; las operaciones serían implementadas por tres métodos diferentes con el mismo nombre pero con diferentes parámetros.
+
+```java
+public class Calculadora {
+    private int acumulador;
+
+    //Devolvemos la suma de x e y
+    public int sumar(int x, int y) {
+        return x + y;
+    }
+
+	//Devolvemos la suma de x a acumulador
+    public int sumar(int x) {
+        this.acumulador += x;
+        return this.acumulador;
+    }
+
+    //Devolvemos la suma de los elementos de la lista
+    public int sumar(int[] numeros) {
+        int suma = 0;
+        for (int n: numeros) {
+            suma += n;
+        }
+        return suma;
+    }
+}
+```
+
+En el ejemplo anterior, vemos que el método `sumar()`, está sobrecargado. Queremos hacer varias operaciones, todas son sumar, pero cada método actúa de una forma diferente. El primero suma dos números, el segundo acumula una cantidad en un atributo, y el tercero recorre un array y suma sus elementos. Los 3 métodos en esencia “suman”, por lo que es una ventaja no tener que cambiarlo de nombre. 
+
+Java sabrá en todo momento qué método es llamado, ya que cada método recibe argumentos diferentes. Si hacemos una llamada al método `sumar(4,6)`, ejecutará el primero. Si llamamos a `sumar(8)` ejecutará el segundo, y si llamamos a `sumar(numeros)`, siendo `numeros` un array definido, ejecutará el tercero. Si llamamos a `sumar("pruebaÉsta")`
+
+La regla que se debe seguir a la hora de sobrecargar métodos en una clase es bastante simple y es que los **métodos sobrecargados deben diferenciarse en el número de parámetros y/o el tipo de los mismos**, siendo irrelevante el tipo de devolución de los métodos.
+
+La sobrecarga no sólo se aplica a métodos; también podemos sobrecargar los constructores de una clase, permitiendo así distintas opciones de inicialización de objetos.
+
+> 💡 Es importante no confundir los conceptos de sobrescritura y sobrecarga. Mientras que el primero consiste en definir de nuevo un método heredado en la superclase “anulando” al anterior, la sobrecarga se basa en tener más de un método con el mismo nombre dentro de la clase (y cada método recibe unos parámetros distintos).
+
+
+
 ## Polimorfismo
+
+El polimorfismo, en programación orientada a objetos, se refiere a la posibilidad de acceder a un variado rango de funciones distintas a través de la misma interfaz. O sea, un mismo identificador puede tener distintas formas (distintos cuerpos de función, distintos comportamientos) dependiendo del contexto en el que se halle.
+
+Veamos un ejemplo de polimorfismo:
+
+```java
+Animal a = new Animal();
+Animal b = new Mamifero();
+Animal c = new Reptil();
+```
+
+`Animal` es la superclase de la que heredan `Mamifero` y `Reptil`. Poseen atributos y métodos en común. Pues todos los objetos creados pueden guardarse en una variable de tipo Animal, puesto que **todas son animales**. También podríamos pasar un `Mamífero` como parámetro en método que tenga como argumento una variable de tipo `Animal`, puesto que `Mamifero` **es un** `Animal`.
+
+> 💡Se podrán guardar variables de un tipo “b” en una variable de tipo “a” siempre que “b” herede de “a”. Siempre para saber si podemos guardar un variable definida como otra clase distinta, nos hacemos la pregunta. ¿La clase “b” **ES UN(A)** “a”?. Por ejemplo, para guardar un objeto Mamífero en una variable de tipo Animal, ¿Un mamífero ES UN animal?. La respuesta es SI, ya que Mamífero hereda de Animal, así que se podrá realizar. ¿Un reptil es un mamífero? NO. Ambas heredan de Animal, pero son clases distintas (hermanos podríamos decir). Así que no podremos crear un objeto de la clase Reptil y guardarlo en una variable de tipo Mamífero, eso provocará un error.
+
+**Un tipo de datos admite valores que sean de otras clases, siempre que sean más concretas y hereden de ella.** Ya sea para albergar valores en variables, para paso de parámetros en una función, etc. 
+
+Otra ventaja es la siguiente:
+
+Imaginemos que la clase Animal tiene un método llamado `comer()`.  Tanto los mamíferos como los reptiles, heredan ese método y lo sobrescriben para adaptarlo a sus clases. 
+
+El objeto `a`, es de la clase `Animal` y tiene los atributos y métodos de la clase `Animal`. Entre ellos `comer()`. 
+
+El objeto `b`, es de la `Animal`, pero en su interior hay un `Mamífero`, y al escribir `b.`, el IDE nos mostrará los métodos y atributos de la clase `Animal` y no tendríamos disponibles los métodos propios de los mamíferos, ya que el objeto no es un `Mamífero`. Aunque si tendríamos disponible el método `comer()` puesto que es de todos los animales.
+
+Al llamar a `a.comer()` estamos llamando al método `comer()` de la clase `Animal`, pero al llamar al método `b.comer()`, estamos llamando al método `comer()` de la clase `Mamífero`. Igual para con `c.comer()`, que ejecutaría el propio método `comer()` del `Reptil`.
+
+Aunque todos los objetos sean `Animal`, cada uno ejecutará su propio método en caso de que lo tengan sobrescrito. Esto es debido a que **en tiempo de edición**, el objeto es un `Animal`, puesto que así se ha definido. Pero en **tiempo de ejecución**, se “transforma” en el objeto real que es, y haría una llamada a sus métodos propios y no los que nos dice el IDE que ejecutaría.
+
+El polimorfismo se entiende mejor con las Colecciones. Después se verán
+
+# Clases Abstractas
+
+{{TODO Por aquí}}
+
+# Interfaces
+
+
+
+
 
