@@ -365,7 +365,21 @@ Por ejemplo, si tenemos definida la clase `Vehículo`, la cual tiene implementad
 
 A esta redefinición de métodos heredados en la subclase se le conoce como **sobrescritura de métodos** y su objetivo es **volver a definir en la subclase un método heredado**, respetando el formato original del mismo. Esto significa que el nuevo método tiene que tener exactamente **el mismo nombre, parámetros definidos y valor devuelto definidos en la superclase**. Lo único que podrá modificarse es el modificador de acceso del método, pudiendo ser menor restrictivo que el de la superclase. Por ejemplo, el método sobrescrito puede ser público mientras que el heredado sea privado.
 
-Cuando se hace referencia al método `acelerar()` de la clase Helicóptero, ya no se ejecutará el método heredado `acelerar()` de la superclase Vehículo, si no el que se haya redefinido en la subclase usando la sobrescritura de métodos. Si se hubiese definido el método `acelerar()` de una forma distinta a la que está descrita, por ejemplo, recibiendo más de un parámetro en lugar de ninguno, no produciría ningún error, ya que se trataría de un caso válido de **sobrecarga** de métodos (lo siguiente 😉), pero dejaría de ser **sobrescritura**.
+Cuando se hace referencia al método `acelerar()` de la clase Helicóptero, ya no se ejecutará el método heredado `acelerar()` de la superclase Vehículo, si no el que se haya redefinido en la subclase usando la sobrescritura de métodos. Si se hubiese definido el método `acelerar()` de una forma distinta a la que está descrita, por ejemplo, recibiendo más de un parámetro en lugar de ninguno, no produciría ningún error, ya que se trataría de un caso válido de **sobrecarga** de métodos (que lo vemos a continuación 😉), pero dejaría de ser **sobrescritura**.
+
+### Palabra reservada SUPER
+
+Al usar la sobrescritura, es importante entender que no estamos **borrando** el método de la superclase para usar el nuestro propio, si no que lo añadimos y usaremos en su lugar por defecto. Siempre podremos usar los métodos propios usando <kbd>this</kbd> y podremos hacer referencia a la superclase con la palabra reservada <kbd>super</kbd>. Por ejemplo, si hemos sobrescrito el método `.acelerar()` del Vehículo en la clase Helicóptero, desde el interior de la clase Helicóptero podremos hacer `this.acelerar()`, llamando así al método del Helicóptero, y `super.acelerar()` realizará una llamada al método de la clase Vehículo. 
+
+Hay que tener en cuenta que es posible que el método de la superclase no esté adaptado al de la subclase (por algún motivo se sobrescribió), pero es bueno saber que está ahí y que podemos hacer uso de él.
+
+{{TODO Poner ejemplos}}
+
+Con `super` también podremos hacer referencias a constructores de la superclase.
+
+{{TODO Poner ejemplos}}
+
+
 
 ## Sobrecarga de métodos
 
@@ -441,7 +455,7 @@ Al llamar a `a.comer()` estamos llamando al método `comer()` de la clase `Anima
 
 Aunque todos los objetos sean `Animal`, cada uno ejecutará su propio método en caso de que lo tengan sobrescrito. Esto es debido a que **en tiempo de edición**, el objeto es un `Animal`, puesto que así se ha definido. Pero en **tiempo de ejecución**, se “transforma” en el objeto real que es, y haría una llamada a sus métodos propios y no los que nos dice el IDE que ejecutaría.
 
-El polimorfismo se entiende mejor con las Colecciones. Después se verán
+El polimorfismo se entiende mejor con las Colecciones.
 
 # Clases Abstractas
 
