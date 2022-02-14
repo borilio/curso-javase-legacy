@@ -373,11 +373,52 @@ Al usar la sobrescritura, es importante entender que no estamos **borrando** el 
 
 Hay que tener en cuenta que es posible que el método de la superclase no esté adaptado al de la subclase (por algún motivo se sobrescribió), pero es bueno saber que está ahí y que podemos hacer uso de él.
 
-{{TODO Poner ejemplos}}
-
 Con `super` también podremos hacer referencias a constructores de la superclase.
 
-{{TODO Poner ejemplos}}
+```java
+public class Animal {
+    private String nombre;
+    
+    public Animal() {}
+    
+    public Animal(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    public void comer() {
+		System.out.println("Está comiendo un Animal");
+    }
+}
+```
+
+```java
+public class Mamifero extends Animal {
+    private int numeroMamas;
+    
+    public Mamifero(String nombre, int numeroMamas) {
+        super(nombre); //Así llamamos al constructor de Animal
+        this.numeroMamas = numeroMamas;
+    }
+    
+    @Overrride
+    public void comer() {
+        System.out.println("Está comiendo un Mamífero");
+    }
+    
+    public void comerPropio(){
+        this.comer(); //Así usamos el comer() de ESTA clase
+    }
+    
+    public void comerHeredado() {
+        super.comer(); //Así usamos el comer() de la superclase Animal
+    }
+}
+```
+
+Podemos ver que tenemos la clase `Animal` y la clase `Mamífero`, que hereda de `Animal`. 
+
+- Hemos implementado dos métodos en la clase `Mamífero` para hacer llamadas a su método `comer()` con `this`,  y al heredado, con `super`. Es importante ver que aunque se le llame sobrescritura, no estamos “borrando” el método heredado. Siempre podremos usar el de la superclase.
+- También podemos ver que en el constructor de `Mamífero`, hemos hecho una llamada al constructor de `Animal`, pasándole los parámetros que necesite. De esta forma podríamos inicializar todos los atributos heredados de golpe (sin necesidad de *setters*), y después ya inicializamos los atributos propios del `Mamífero` de manera tradicional.
 
 
 
@@ -459,9 +500,141 @@ El polimorfismo se entiende mejor con las Colecciones.
 
 # Clases Abstractas
 
-{{TODO Por aquí}}
+A veces en una clase, no podemos implementar los métodos de una forma concreta, y queremos que sean las clases hijas las que implementen un comportamiento concreto. Por ejemplo: Sabemos que TODOS los animales deberían tener el método `comer()`. Y además queremos que todas las clases que hereden lo sobrescriban para que el método se adapte a como come cada tipo de animal.
+
+Con lo sabemos ahora, podemos hacer el método en la clase Animal, y **esperar** que las clases hijas lo sobrescriban. Pero no es de obligado cumplimiento. Pueden sobrescribirlo, así tendrían su propio método, o pueden no hacerlo, y así ejecutarían lo implementado en la clase Animal, que no estaría adaptado.
+
+Para **OBLIGAR** a una clase a que sobrescriba los métodos heredados existen los métodos abstractos. Cuando definimos un método abstracto, solo le estamos diciendo EL QUÉ debería tener, pero no EL COMO debería funcionar. Por ejemplo, podemos indicarle a la clase `Animal`, que tendrá un método llamado comer(), que no recibe nada y que no retorna nada. Y listo. No escribimos nada de código en el método. En lugar de abrir llaves y escribir código, escribimos la **firma del método** y terminamos con un punto y coma (;).
+
+Y para indicar que ese método es abstracto, debemos indicarlo con la palabra reservada <kbd>abstract</kbd> después del modificador de acceso.
+
+```java
+public abstract class Animal {
+    ...
+
+    public abstract void comer();
+}
+```
+
+**Cuando una clase tiene al menos un método abstracto, la clase también deberá declararse como abstracta.** Por esa razón, en cuanto le ponemos el `abstract` en el método `comer()`, el IDE nos obligará a poner `abstract` también en la clase. 
+
+Esto **obligará** a todas las clases que hereden de la clase abstracta, a que tengan que sobrescribir **obligatoriamente** el método abstracto y a definir su comportamiento. Ya no podremos elegir si sobrescribir el método o no. Tendremos que hacerlo. Al forzarlo, nos aseguramos que todos los clases que hereden de la clase abstracta tendrán método el cual estará adaptado a sus necesidades.
+
+Como la clase abstracta puede tener métodos abstractos (es posible que no los tenga), **no se podrán instanciar objetos de una clase abstracta**. Tiene sentido, ya que, ¿que pasaría si hacemos una llamada a un método que no está implementado?. 
+
+>  💡 Al no poderse instanciar objetos de una clase abstracta, es un buen mecanismo para impedir que se creen objetos de una clase genérica, obligando a usar clases más especializadas que tengan sus métodos concretos definidos. Por ejemplo, no queremos que se puedan crear objetos Animal, ya que es muy genérica, así obligamos a que los objetos que usemos sean más específicos.
 
 # Interfaces
+
+En las interfaces se especifica qué se debe hacer pero no su implementación. Serán las clases que implementen estas interfaces las que describen la lógica del comportamiento de los métodos. En otras palabras, **es una “clase” en la que todos sus métodos son abstractos**. 
+
+Una interfaz puede tener atributos, pero deberán ser constantes. Aunque no es muy común.
+
+Las interfaces, al igual que las clases abstractas, **no pueden ser instanciadas.**
+
+Las interfaces se definen de la siguiente forma:
+
+- Se crea un nuevo archivo, como si fuéramos a crear una clase, pero en lugar de `class`, se escribe `interface`:
+- Se describe la firma de los métodos y se terminan en ;. No se escribe su implementación. 
+- Se considera que todos los métodos son `public` y `abstract` por definición, por lo que no es necesario indicarlo.
+
+``` java
+public interface NombreInterfaz {
+    public void nombreMetodo1();
+    public String nombreMetodo2(int parametro1, double parametro2);
+    ...
+}
+```
+
+**Cualquier clase que implemente la interfaz deberá sobrescribir los métodos abstractos definidos por la interfaz.**
+
+Las interfaces se implementan con la palabra reservada <kbd>implements</kbd>.
+
+```java
+public class NombreClase implements NombreInterfaz {
+    ...
+    
+    @Override
+    public void nombreMetodo1(){
+        // Deberemos implementar los métodos
+    }
+    
+    @Override
+    public String nombreMetodo2(int parametro1, double parametro2) {
+        // Deberemos implementar los métodos
+    }
+}
+```
+
+Hasta aquí parece que es exactamente lo mismo que usar clases abstractas. Pero hay una gran diferencia.
+
+En Java no existe la herencia múltiple, por lo que una clase solamente puede heredar de UNA clase. Una clase puede heredar de otra, que a su vez hereda de otra, y a su vez de otra, eso se puede perfectamente. Pero simultáneamente no puede heredar de una y de otra. Por lo que no podemos heredar de DOS clases abstractas.
+
+Con las interfaces si. Podemos implementar todas las interfaces que queramos. A esto sumado que también podemos seguir usando la herencia, o no. 
+
+```java
+public class NombreClase extends Superclase1 implements Interfaz1, Interfaz2, Interfaz3 {
+    ...
+}
+```
+
+La clase `NombreClase`, hereda de `Superclase1` todos sus métodos y atributos, e implementa todas las interfaces `Interfaz1`, `Interfaz2`, `Interfaz3`. Por lo que estaría obligada a desarrollar TODOS los métodos abstractos que estén definidos en las 3 interfaces.
+
+Otro ejemplo:
+
+```java
+public interface Nave {
+    public void moverPosicion(int x, int y);
+    public void disparar();
+}
+```
+
+```java
+public class NaveJugador implements Nave {
+    public void moverPosicion(int x, int y) {
+        // Implementamos el método
+        this.posActualX -= x;
+        this.posActualY -= y;
+    }
+    public void disparar(){
+        // Implementamos el método
+        System.out.print("---");
+    }
+}
+```
+
+La clase `NaveJugador`, implementa la interfaz `Nave`, por lo que **debe** sobrescribir los métodos abstractos definidos por la interfaz.
+
+Además podríamos hacer otra interfaz `MotorHiperespacio`, para dotar a nuestra nave de un nuevo método para saltar al Hiperespacio.
+
+```java
+public interface MotorHiperespacio {
+    public void saltarHiperespacio();
+}
+```
+
+ ```java
+ public class NaveJugador implements Nave, MotorHiperespacio {
+    public void moverPosicion(int x, int y) {...}
+    public void disparar(){...}
+    public void saltarHiperespacio(){...}    
+ }
+ ```
+
+Podemos entender las interfaces como funcionalidades que le podemos dar a las clases, sin que estas tengan que estar relacionadas entre si a través de la herencia. Por ejemplo, podríamos hacer que una clase que NO ES UNA NAVE, pudiese tener el método para saltar al hiperespacio.
+
+```java
+public class Superman implements MotorHiperespacio {
+    ...
+    public void saltarHiperespacio(){...}  
+}
+```
+
+Ahora, tanto `NaveJugador`, como `Superman`, que son clases que no tienen ninguna relación de herencia, ambas tienen el método `saltarHiperespacio()`. Porque ambas implementan la interfaz `MotorHiperespacio`, la cual les obliga a implementar su método.
+
+Mezclando las capacidades de la herencia, las clases abstractas y las interfaces, podremos crear esquemas jerárquicos complejos, reaprovechando código de una forma muy eficaz. 
+
+
 
 
 
