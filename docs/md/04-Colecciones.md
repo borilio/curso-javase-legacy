@@ -189,9 +189,9 @@ La respuesta a la primera pregunta es que **NO SABE HACERLO**, por lo que dará 
 
 El método `compareTo` recibirá una objeto de la misma clase (Persona en nuestro ejemplo), y retornará un entero. Ese entero deberá seguir los siguientes criterios:
 
-- Será negativo si el objeto recibido es menor que el objeto que invoca el método.
-- Será 0 si el objeto recibido es igual al objeto que invoca el método.
-- Será positivo si el objeto recibido es mayor que el objeto que invoca el método.
+- Será negativo si el objeto que invoca el método es menor que el objeto recibido.
+- Será 0 si el objeto que invoca el método es igual que el objeto recibido.
+- Será positivo si el objeto que invoca el método es mayor que el objeto recibido.
 
 Solo tenemos que sobrescribir el método. Las llamadas y las comparaciones las hará de forma interna el TreeSet al hacer una inserción con `add`.
 
@@ -243,9 +243,9 @@ Todavía nos queda una duda… ¿Por qué en las colecciones que hicimos de ejem
 
 ## Características
 
-- ba
-- ba
-- ba
+- No admiten claves duplicadas. Valores duplicados si.
+- Permiten búsqueda rápida por clave.
+- 
 - 
 
 # ¿Cual colección usar?
