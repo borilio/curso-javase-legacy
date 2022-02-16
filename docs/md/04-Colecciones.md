@@ -83,7 +83,7 @@ La implementación más común de la Interfaz **List**, es la clase **[ArrayList
 Su sintaxis es la siguiente:
 
 ```java
-List<Objeto> nombreColección = new ArrayList<Objeto>();
+List<Objeto> nombreColección = new ArrayList<>();
 ```
 
 Creamos un nuevo objeto del tipo `ArrayList` y debemos parametrizar el tipo de dato que albergará la colección. 
@@ -93,10 +93,12 @@ Creamos un nuevo objeto del tipo `ArrayList` y debemos parametrizar el tipo de d
 Veamos un ejemplo para crear un ArrayList de Strings.
 
 ```java
-List<String> lista = new ArrayList<String>();
+List<String> lista = new ArrayList<>();
 ```
 
 > 🤓 Se considera una buena práctica para el uso de colecciones, el declarar la variable del tipo de la interfaz (`List`) que es más genérico, e inicializarla con el nombre de la especialización (`ArrayList`). De esta forma, en la misma variable `lista`, podremos guardar un ArrayList, o cualquier otro objeto que implemente la interfaz List, como un LinkedList. **Haremos lo mismo para todas las demás colecciones.**
+>
+> 🤓 Además, en la inicialización, podemos omitir la clase parametrizada, pudiendo dejar `new Colección<>();`, siendo Colección la clase que implementa la interfaz, sea ArrayList, TreeSet o HashMap.
 
 Así estamos creando el objeto `lista`, que será un `ArrayList`, que contendrá `String`. Inicialmente se crea un ArrayList vacío, y deberemos añadirle elementos con el método <kbd>add</kbd>. Como le hemos indicado que será una colección de `String`, el método `add` sólo admitirá objetos de esa clase.
 
@@ -136,13 +138,13 @@ La colección Set tiene como principal característica que no admite duplicados 
 Su sintaxis es la siguiente:
 
 ```java
-Set<Objeto> nombreColección = new TreeSet<Objeto>();
+Set<Objeto> nombreColección = new TreeSet<>();
 ```
 
 Veamos el ejemplo para crear un TreeSet de enteros.
 
 ```java
-Set<Integer> numeros = new TreeSet<Integer>();
+Set<Integer> numeros = new TreeSet<>();
 numeros.add(8);
 numeros.add(12);
 numeros.add(12); // No lo añade. add devuelve false.
@@ -171,7 +173,7 @@ Y ahora hago una colección de la Personas. Hasta aquí todo normal.
 
 ````java
 Set<Persona> lista = new TreeSet<Persona>();
-lista.add(new Persona("Toby", 46));
+lista.add(new Persona("Tobey", 46));
 lista.add(new Persona("Tom", 25));
 lista.add(new Persona("Andrew", 38));
 ````
@@ -236,8 +238,79 @@ Todavía nos queda una duda… ¿Por qué en las colecciones que hicimos de ejem
 
 # Map
 
-{{TODO Map}}
+Las colecciones que implementan la interfaz `Map`, están basadas en pares de `clave-valor`. Cada par de clave-valor se llama **entrada**. 
 
+- La *clave* es un objeto que identifica a una entrada.
+- El *valor* es un objeto que contiene el valor asociado a la clave. 
+
+Podríamos decir que en un `ArrayList<Persona>`, el valor sería el objeto Persona, y la clave sería el índice que es un entero SIEMPRE. La ventaja de los Map es que en lugar de un entero para el índice, podemos usar otro objeto cualquiera para poder acceder a la Persona, pudiendo asociar como clave un char, un String u otro objeto más complejo.
+
+La implementación más común de la interfaz Map es **`HashMap`**. 
+
+Su sintaxis es la siguiente:
+
+```java
+Map<Clave, Valor> nombreColección = new HashMap<>();
+```
+
+Donde Clave y Valor son las clases que representarán a la clave y al valor dentro del Map. Veamos un ejemplo de código:
+
+Vamos a crear una colección con los personajes de [Reservoir Dogs](https://es.wikipedia.org/wiki/Reservoir_Dogs#Reparto_y_personajes).
+
+Creamos primero la clase Actor:
+
+```java
+public class Actor {
+    private String nombre;
+    private String personaje;
+    ...
+}
+```
+
+```java
+Map<String, Actor> reparto = new HashMap<>();
+reparto.put("BLANCO", new Actor("Harvey Keitel", "Larry"));
+reparto.put("NARANJA", new Actor("Tim Roth", "Freddy"));
+reparto.put("ROSA", new Actor("Steve Buscemi", "Michael"));
+reparto.put("RUBIO", new Actor("Michael Madsen", "Vic Vega"));
+reparto.put("AZUL", new Actor("Edward Bunker", "Jack"));
+reparto.put("MARRON", new Actor("Quentin Tarantino", "Tommy"));
+reparto.put("MARRON", new Actor("Tarantinoooor", "Tommy")); // Se inserta, sustituyendo al anterior.
+```
+
+> **✏** Para añadir elementos a la colección HashMap, deberemos usar el método <kbd>put(clave,valor)</kbd> que recibe un objeto con la clave y otro objeto con el valor. El método devuelve un `null` si no había un valor previo asociado a la clave (es decir, si es una entrada nueva), o en casi de si existir, devuelve el valor previo (el valor que borrará de la colección, ya que será sustituido por el nuevo valor). Por esta razón, no existirán nunca claves duplicadas. 
+
+Otros ejemplos de métodos útiles serían:
+
+```java
+// Acceder a elementos por su clave
+reparto.get("ROSA"); // retorna -> Actor {nombre=Steve Buscemi, personaje=Michael}
+// Borrar elementos
+reparto.remove("RUBIO"); // retorna -> Actor {nombre=Michael Madsen, personaje=Vic Vega}
+// Buscar elementos
+reparto.containsKey("VERDE"); // retorna -> false
+```
+
+Internamente los HashMap utilizan dos tablas, una para las claves y otra para los valores. Se puede acceder a ambas tablas a través de los métodos `keySet()` y `values()`, respectivamente. Y podemos recorrer la colección iterando sobre las claves o los valores, según nos convenga.
+
+Ejemplo de recorrer un HashMap con un bucle `for each`:
+
+```java	
+// Iterando sobre sus claves
+for (String clave : reparto.keySet()) {
+    Actor actor = reparto.get(clave);
+    System.out.println(actor.getPersonaje() + " (interpretado por " + actor.getNombre() + ")");
+}
+```
+
+```java
+// Iterando sobre sus valores
+for (Actor actor : reparto.values()) {
+    System.out.println(actor.getPersonaje() + " (interpretado por " + actor.getNombre() + ")");
+}
+```
+
+Ya es decisión de usar la forma que mejor se adapte a la lógica de nuestra aplicación. Por ejemplo, si sólo queremos mostrar los actores, en nuestro ejemplo sería más simple iterar sobre sus valores, ya que no usamos sus claves, pero si hubiésemos querido mostrar su clave (para mostrar el apodo que tenían en la película), en el segundo `for` no tenemos la clave por ningún sitio. Es importante conocer las distintas formas y después
 
 
 
@@ -245,8 +318,8 @@ Todavía nos queda una duda… ¿Por qué en las colecciones que hicimos de ejem
 
 - No admiten claves duplicadas. Valores duplicados si.
 - Permiten búsqueda rápida por clave.
-- 
-- 
+- Flexibilidad al tener claves y valores de distintos tipos.
+
 
 # ¿Cual colección usar?
 
