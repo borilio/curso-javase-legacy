@@ -110,9 +110,10 @@ lista.add("Clint");
 lista.add("Steve");
 lista.add("Natasha");
 lista.add("Peter");
+lista.add(2, "Thanos"); // Se inserta en la posición 2, moviendo todos los índices siguientes
 ```
 
-Cada vez que insertamos un elemento, este se posiciona al final de la lista.
+Cada vez que insertamos un elemento con `add(objeto)`, este se posiciona al final de la lista. También podemos usar el método sobrecargado `add(índice, objeto)`, que le pasamos el índice donde insertar el objeto, y lo que hace es sumarle un 1 a todos los índices siguientes.
 
 Para acceder a los elementos de la lista, usaremos el método <kbd>get</kbd>, el cual recibe un entero que representa el índice (posición) del elemento dentro del ArrayList. Sus índices empiezan en 0, igual que los arrays.
 
@@ -120,7 +121,20 @@ Para acceder a los elementos de la lista, usaremos el método <kbd>get</kbd>, el
 System.out.println(lista.get(2)); // Clint
 ```
 
+Para borrar los elementos, podemos hacerlo de dos formas, gracias a la sobrecarga del método `remove()`
+
+```java
+// Borramos por índice
+lista.remove(2); // Borraría a Thanos
+// Borramos por objeto
+lista.remove("Natasha"); // Borraría a Natasha. Da igual en que posición estuviese
+// Borramos todo
+lista.clear(); // Borra a todos los elementos
+```
+
 La colección List, posee todos los métodos comunes que hemos descrito con anterioridad, como `contains`, `isEmpty`, `clear`, `remove`, etc. Lo mejor siempre para comprobar los métodos de una colección será crear el objeto y escribir su nombre  y un punto para que el IDE nos muestre la lista de todos los métodos disponibles, así como la documentación de como usarlos.
+
+
 
 ## Características
 
@@ -129,7 +143,7 @@ La colección List, posee todos los métodos comunes que hemos descrito con ante
 - Admiten duplicados
 - No tienen un orden natural por defecto
 - Acceso directo por posición
-- Son muy parecidos a los arrays, y por eso familiares para todos los programadores.
+- Son muy parecidos a los arrays, y por eso familiares para todos los programadores
 
 # Set
 
@@ -310,9 +324,7 @@ for (Actor actor : reparto.values()) {
 }
 ```
 
-Ya es decisión de usar la forma que mejor se adapte a la lógica de nuestra aplicación. Por ejemplo, si sólo queremos mostrar los actores, en nuestro ejemplo sería más simple iterar sobre sus valores, ya que no usamos sus claves, pero si hubiésemos querido mostrar su clave (para mostrar el apodo que tenían en la película), en el segundo `for` no tenemos la clave por ningún sitio. Es importante conocer las distintas formas y después
-
-
+Ya es decisión de usar la forma que mejor se adapte a la lógica de nuestra aplicación. Por ejemplo, si sólo queremos mostrar los actores, en nuestro ejemplo sería más simple iterar sobre sus valores, ya que no usamos sus claves, pero si hubiésemos querido mostrar su clave (para mostrar el apodo que tenían en la película), en el segundo `for` no tenemos la clave por ningún sitio. Es importante conocer las distintas formas y después elegir.
 
 ## Características
 
