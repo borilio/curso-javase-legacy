@@ -14,11 +14,39 @@ Esta independencia, tanto del sistema operativo como del dispositivo, ha contrib
 
 # JDK y JRE
 
-{{Próximamente}}
+**JDK (Java Development Kit)** es un conjunto de herramientas de programación que incluye todo lo necesario para desarrollar aplicaciones Java. Incluye el compilador Java, el depurador, las bibliotecas y las utilidades necesarias para crear y probar aplicaciones Java. Un elemento importante de la JDK es la JVM o máquina virtual de Java. Lo explicamos en el siguiente punto.
+
+Por otro lado, **JRE (Java Runtime Environment)** es un conjunto de programas y librerías que proporcionan un entorno de ejecución para las aplicaciones Java. JRE es necesario para ejecutar cualquier aplicación Java. Incluye el motor de Java, las bibliotecas y los componentes necesarios para ejecutar una aplicación.
+
+En resumen, JDK es necesario para desarrollar aplicaciones Java, mientras que JRE es necesario para ejecutar aplicaciones Java. Es importante tener en cuenta que si se tiene JDK se tiene JRE porque viene incluida, pero se puede tener instalada solo la JRE sin tener JDK.
+
+![Diferencia entre JDK y JRE](img/01/jvm-jre-jdk1.png)
 
 # Máquina Virtual de Java (JVM)
 
-{{Próximamente}}
+La **Máquina Virtual de Java** (JVM, por sus siglas en inglés) es un componente clave de la plataforma Java. Es un intérprete de código que se encarga de ejecutar las aplicaciones Java. La JVM es independiente del sistema operativo y del hardware, lo que significa que una aplicación Java puede ser ejecutada en cualquier plataforma que tenga una JVM instalada.
+
+La JVM carga el código byte (o *byte code*) compilado de una aplicación Java, lo verifica y lo ejecuta. El código byte es el resultado de compilar el código fuente de una aplicación Java. La JVM también se encarga de gestionar la memoria y los recursos del sistema, como la gestión de memoria dinámica y la gestión de excepciones.
+
+Además, la JVM es responsable de proporcionar seguridad a las aplicaciones Java al controlar el acceso a los recursos del sistema y al aplicar restricciones de seguridad en el código.
+
+En resumen, la Máquina Virtual de Java es un intérprete que se encarga de ejecutar las aplicaciones Java, independientemente del sistema operativo o el hardware en el que se ejecuta. Es responsable de cargar, verificar y ejecutar el código byte de una aplicación, así como de gestionar la memoria y los recursos del sistema y proporcionar seguridad a las aplicaciones.
+
+![Proceso de compilación de un archivo .java a un .class](img/01/jvm-java-compiler-bytecode.png)
+
+
+
+# Compilación de un programa Java
+
+El proceso de compilación de un programa Java es el siguiente:
+
+1. El desarrollador escribe el código fuente de la aplicación en un archivo con extensión `.java` utilizando un editor de texto o un entorno de desarrollo integrado (IDE).
+2. El código fuente es compilado utilizando el compilador de Java, que se encuentra en el JDK (Java Development Kit). El compilador analiza el código fuente y lo convierte en código byte, que es el lenguaje que entiende la JVM (Máquina Virtual de Java).
+3. El compilador genera un archivo con extensión `.class` para cada clase declarada en el archivo `.java`. Los archivos `.class` contienen el código byte de la aplicación.
+4. Una vez generados los archivos `.class`, estos pueden ser ejecutados en cualquier plataforma que tenga una JVM instalada, ya que la JVM es independiente del sistema operativo y del hardware.
+5. Durante la ejecución, la JVM carga los archivos `.class` y los interpreta para ejecutar las instrucciones contenidas en ellos.
+
+Es importante mencionar que el **código byte generado en el proceso de compilación no es legible para los humanos**, ya que se encuentra en un formato binario. Sin embargo, el código byte es fácilmente interpretable por la JVM, lo que permite que una aplicación Java se ejecute en cualquier plataforma compatible (como podemos ver en el esquema anterior).
 
 # Tipos de datos
 
