@@ -12,7 +12,9 @@
 
 Esta independencia, tanto del sistema operativo como del dispositivo, ha contribuido a expandir el lenguaje, y a que numerosos fabricantes de software hayan apostado por el, y que a día de hoy siga siendo la principal opción para numerosas empresas y programadores a la hora realizar sus desarrollos.
 
-# JDK y JRE
+
+
+## JDK y JRE
 
 **JDK (Java Development Kit)** es un conjunto de herramientas de programación que incluye todo lo necesario para desarrollar aplicaciones Java. Incluye el compilador Java, el depurador, las bibliotecas y las utilidades necesarias para crear y probar aplicaciones Java. Un elemento importante de la JDK es la JVM o máquina virtual de Java. Lo explicamos en el siguiente punto.
 
@@ -22,7 +24,9 @@ En resumen, JDK es necesario para desarrollar aplicaciones Java, mientras que JR
 
 ![Diferencia entre JDK y JRE](img/01/jvm-jre-jdk1.png)
 
-# Máquina Virtual de Java (JVM)
+
+
+## Máquina Virtual de Java (JVM)
 
 La **Máquina Virtual de Java** (JVM, por sus siglas en inglés) es un componente clave de la plataforma Java. Es un intérprete de código que se encarga de ejecutar las aplicaciones Java. La JVM es independiente del sistema operativo y del hardware, lo que significa que una aplicación Java puede ser ejecutada en cualquier plataforma que tenga una JVM instalada.
 
@@ -36,7 +40,7 @@ En resumen, la Máquina Virtual de Java es un intérprete que se encarga de ejec
 
 
 
-# Compilación de un programa Java
+## Compilación de un programa Java
 
 El proceso de compilación de un programa Java es el siguiente:
 
