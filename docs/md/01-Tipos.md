@@ -63,7 +63,7 @@ También llamados atómicos, puesto que son las unidades más pequeñas con las 
 
 | Nombre             | Declaración | Descripción                                                  | Memoria | Rango                                              |
 | ------------------ | ----------- | ------------------------------------------------------------ | ------- | -------------------------------------------------- |
-| Booleano           | `boolean`   | Define una variable que puede tomar dos posibles valores. `true` o `false`. | 1 bit   | `true` o `false`                                   |
+| Booleano           | `boolean`   | Define una variable que puede tomar dos posibles valores. `true` o `false`. Aunque solo requeriría un bit, lo mínimo almacenable en memoria es un byte. | 1 byte  | `true` o `false`                                   |
 | Byte               | `byte`      | Define una variable entera pequeña.                          | 1 byte  | [-128 ... 127]                                     |
 | Short              | `short`     | Define una variable entera corta.                            | 2 bytes | [-32.768 … 32.767]                                 |
 | Entero             | `int`       | Define una variable entera estándar. Suele ser la más usada para representar un número entero. | 4 bytes | [-2<sup>31</sup> ... 2<sup>31</sup>-1]             |
@@ -212,6 +212,7 @@ String cadena2 = 1 + 2 + "3";   //Resultado 1+2=3 -> 3 + "3" -> "33"
 String cadena3 = 1 + (2 + "3"); //Resultado 2+"3"= "23" -> 1 + "23" -> "123"
 String cadena4 = "1" + (2 + 3); //Resultado (2+3=5) -> "1" + 5 -> "15"
 String cadena5 = 1 + 2 + 3;     //Daría error, no puede meter un int en un String
+String cadena6 = 1 + 2 + 3 + "";//Resultado 1+2+3=6 -> 6 + "" -> 
 ```
 
 
