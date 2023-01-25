@@ -20,7 +20,7 @@ Esta independencia, tanto del sistema operativo como del dispositivo, ha contrib
 
 Por otro lado, **JRE (Java Runtime Environment)** es un conjunto de programas y librerías que proporcionan un entorno de ejecución para las aplicaciones Java. JRE es necesario para ejecutar cualquier aplicación Java. Incluye el motor de Java, las bibliotecas y los componentes necesarios para ejecutar una aplicación.
 
-En resumen, JDK es necesario para desarrollar aplicaciones Java, mientras que JRE es necesario para ejecutar aplicaciones Java. Es importante tener en cuenta que si se tiene JDK se tiene JRE porque viene incluida, pero se puede tener instalada solo la JRE sin tener JDK.
+**En resumen, JDK es necesario para desarrollar aplicaciones Java, mientras que JRE es necesario para ejecutar aplicaciones Java**. Es importante tener en cuenta que si se tiene JDK se tiene JRE porque viene incluida, pero se puede tener instalada solo la JRE sin tener JDK.
 
 ![Diferencia entre JDK y JRE](img/01/jvm-jre-jdk1.png)
 
@@ -244,7 +244,7 @@ String cadena2 = 1 + 2 + "3";   //Resultado 1+2=3 -> 3 + "3" -> "33"
 String cadena3 = 1 + (2 + "3"); //Resultado 2+"3"= "23" -> 1 + "23" -> "123"
 String cadena4 = "1" + (2 + 3); //Resultado (2+3=5) -> "1" + 5 -> "15"
 String cadena5 = 1 + 2 + 3;     //Daría error, no puede meter un int en un String
-String cadena6 = 1 + 2 + 3 + "";//Resultado 1+2+3=6 -> 6 + "" -> 
+String cadena6 = 1 + 2 + 3 + "";//Resultado 1+2+3=6 -> 6 + "" -> "6"
 ```
 
 
@@ -309,12 +309,12 @@ String reset = "\u001B[0m";
 
 System.out.print(reset); //Ponemos el color por defecto
 System.out.println("Este texto sale con el color por defecto...");
-System.out.print(blue); //A partir de aquí imprimimos en azul
+System.out.print(cyan); //A partir de aquí imprimimos en cyan
 System.out.print("Este texto ya sale en azul");
 ```
 ![Consola colores1](img/01/01.png) 
 
-> **Nota:** Si cambiamos los colores, permanecerán activos hasta que se reseteen. Por lo que sería una buena práctica imprimir siempre al inicio del programa el color `\u001B[0m` (como hacemos en la línea 12 del ejemplo) para que no empezara a escribir con un color inesperado.
+> **Nota:** Si cambiamos los colores, permanecerán activos hasta que se reseteen o se cambien por otro color. Por lo que sería una buena práctica imprimir siempre al inicio del programa el color `\u001B[0m` (como hacemos en la línea 12 del ejemplo) para que no empezara a escribir con un color inesperado.
 
 Aunque lo más fácil es guardar los códigos en variables para después imprimirlas cuando queramos, también podemos imprimir los códigos como parte de un String.
 
@@ -370,7 +370,7 @@ Scanner teclado = new Scanner(System.in);
 teclado.close(); // Lo cerramos cuando ya no vamos a usarlo
 ```
 
-> **Nota:** Si cerramos el objeto scanner y después lo intentamos usar, provocará una 
+> **Nota:** Si cerramos el objeto scanner y después lo intentamos usar, provocará una excepción y el programa abortará la ejecución.
 
 ### Buffer de teclado
 
