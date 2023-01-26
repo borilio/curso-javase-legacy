@@ -26,6 +26,10 @@ Antes de poder utilizar un objeto, se debe definir su clase. **La clase es la de
 
 Podemos decir que la clase es como el molde o el plano con el que se crearán todos los objetos de una clase.
 
+<img src="img/03/r2d2-blueprint.jpg" alt="Ejemplo de Plano o blueprint de R2D2" style="zoom: 67%;" />
+
+> 🤓 A las clases Java, en inglés también se les llama *blueprint*, que significa plano.
+
 Por ejemplo, si quisiéramos crear el juego del parchís en Java, una clase sería la casilla, otra las fichas, otra el dado, etc., etc. En el caso de la casilla, se definiría la clase para indicar su funcionamiento y sus propiedades, y luego se crearía tantos objetos casilla como casillas tenga el juego. Lo mismo ocurriría con las fichas, la clase ficha definiría las propiedades de la ficha (color y posición por ejemplo) y su funcionamiento mediante sus métodos (por ejemplo un método sería mover, otro llegar a la meta, etc.), luego se crearían tantos objetos ficha, como fichas tenga el juego.
 
 Normalmente las clases representan cosas como:
@@ -38,15 +42,17 @@ Normalmente las clases representan cosas como:
 
 Una clase define el funcionamiento de los objetos. Es decir, la clase es la plantilla que cumplen todos los objetos de esa clase. De otra forma, la clase marca el tipo de objeto. Más exactamente marca la *idea* de objeto.
 
+<img src="img/03/claseyobjeto.jpg" alt="Ejemplo de un cortador de galletas que representa una clase, y obtiene galletas que representan los objetos" style="zoom:80%;" />
+
 Por ejemplo, la clase ***Coche*** definiría la idea o modelo general de coche que tenemos en la cabeza. Esa idea abarca a todos los coches; en esa idea está el hecho de que los coches tienen cuatro ruedas, motor, consumen combustible, aceleran, frenan,… Sin embargo si miramos por la ventana y vemos un coche, ese coche no es ya una clase, **es un objeto**. Un objeto de la clase Coche.
 
-Suele usarse la palabra instancia para referirnos a un objeto creado de una clase. Por ejemplo, el objeto `panda` es una instancia de la clase `Coche`.
+Suele usarse la palabra **instancia** para referirnos a un objeto creado de una clase. Por ejemplo, el objeto `seat` es una instancia de la clase `Coche`.
 
 ## Diagramas UML
 
 UML es la abreviatura de *Universal Modelling Language* (Lenguaje De Modelado Universal), que define una serie de esquemas diseñados para facilitar la tarea de diseñar aplicaciones informáticas.
 
-El organismo responsable de UML es el OMG (Objects Management Group, Grupo de Administración de Objetos) que es un organismo sin ánimo de lucro que pretende estandarizar la programación orientada a objetos. El diagrama UML que permite representar clases se llama precisamente diagrama de clases y se representa de la siguiente forma:
+El organismo responsable de UML es el OMG (Objects Management Group, Grupo de Administración de Objetos) que es un organismo sin ánimo de lucro que pretende estandarizar la programación orientada a objetos. El diagrama UML que permite representar clases se llama precisamente **diagrama de clases** y se representa de la siguiente forma:
 
 ![UML 1](img/03/01.png)
 
@@ -98,7 +104,7 @@ public class Vehiculo {
 }
 ```
 
-> **Importante: ** El identificador que usemos en la clase debe coincidir con el nombre del archivo .java donde guardaremos el código. Cada clase se guardará en un archivo diferente.
+> **⚠️Importante: ** El identificador que usemos en la clase debe coincidir con el nombre del archivo .java donde guardaremos el código. Cada clase se guardará en un archivo diferente.
 
 Primero se declaran los **atributos** sin inicializar, y después los **métodos**. En ambos (por ahora), se antepone la palabra `public`, que es un **modificador de acceso**, que se explicarán en detalle más adelante.
 
@@ -288,6 +294,23 @@ Es una forma de hacer referencia al objeto antes de que este sea creado. Por esa
 
 
 
+### Modificadores de acceso
+
+En Java, los modificadores de acceso **son palabras clave utilizadas para controlar el nivel de acceso a las variables, métodos y clases** en un programa. Los modificadores de acceso permiten especificar quién puede acceder a una determinada parte de un programa. Los modificadores de acceso disponibles en Java son:
+
+- `private`: Este modificador de acceso indica que el miembro de la clase solo puede ser accedido por miembros de la misma clase.
+- `default` (sin modificador): Este modificador de acceso indica que el miembro de la clase puede ser accedido por miembros que estén en el mismo paquete.
+- `protected`: Este modificador de acceso indica que el miembro de la clase puede ser accedido por miembros del mismo paquete y por cualquier subclase de la clase (esté en el paquete que esté).
+- `public`: Este modificador de acceso indica que el miembro de la clase puede ser accedido desde cualquier lugar del programa.
+
+> **⚠️Importante**: por defecto, todos los miembros de una clase (variables, métodos, constructores, etc.) son de acceso `default` (sin modificador) a menos que se especifique explícitamente un modificador de acceso.
+
+Los modificadores de acceso se utilizan para proteger los miembros de una clase de ser modificados o accedidos de forma no deseada, y para asegurar que solo los miembros apropiados de la clase puedan acceder a ellos. También se utilizan para controlar el alcance de las variables y métodos y para asegurar que las clases y objetos solo interactúen de manera segura y controlada.
+
+A continuación una tabla resumen con los modificadores de acceso en Java:
+
+![Tabla resumen con los modificadores de acceso y sus alcances](img/03/modificadores-acceso.png)
+
 ## Herencia
 
 La herencia es quizá la característica más interesante y potente que ofrecen los lenguajes orientados a objetos. Mediante ella, es posible **crear clases que dispongan de forma automática de todos atributos y métodos definidos en clases ya existentes**.
@@ -302,8 +325,8 @@ La relación de herencia entre dos clases se expresa mediante una flecha que sal
 
 En la siguiente figura tenemos algunos ejemplos de clases relacionadas a través de la herencia.
 
-| ![herencia figuras](img/03/04.png) | ![herencia figuras](img/03/05.png) | ![herencia informático](img/03/06.png) |
-| :--------------------------------: | :--------------------------------: | :------------------------------------: |
+| ![herencia deportistas](img/03/04.png) | ![herencia figuras](img/03/05.png) | ![herencia informático](img/03/06.png) |
+| :------------------------------------: | :--------------------------------: | :------------------------------------: |
 
 
 
