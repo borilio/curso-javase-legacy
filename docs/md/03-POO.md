@@ -208,7 +208,7 @@ Podemos decir de alguna forma, que la **abstracción es ponerle límites al obje
 
 ## Encapsulación
 
-La encapsulación, aplicada al contexto de creación de una clase, es un concepto que se basa en **mantener aislados del exterior los atributos de la clase.** Para lograr esto, los atributos en lugar de usar el modificador `public` como hemos visto, ahora usaremos **`private`**, permitiendo que el acceso a los mismos sólo pueda realizarse desde el interior de la clase (desde sus propios métodos).
+La encapsulación, aplicada al contexto de creación de una clase, es un concepto que se basa en **mantener aislados del exterior los atributos y métodos de la clase.** Para lograr esto, los atributos en lugar de usar el modificador `public` como hemos visto, ahora usaremos **`private`**, permitiendo que el acceso a los mismos sólo pueda realizarse desde el interior de la clase (desde sus propios métodos).
 
 La encapsulación de los atributos es un mecanismo de protección de los datos pues, al impedir el acceso directo a los mismos desde el exterior de la clase, evitamos que se pueda asignar un valor inapropiado al atributo y dejar así al objeto en un estado inestable. Por ejemplo en el caso de la Clase Coche, con su atributo potencia, si no se protege el atributo declarándolo como privado, desde un código externo a la clase se podrá hacer algo como esto:
 
@@ -228,6 +228,8 @@ setNombreAtributo
 ```
 
 Donde `NombreAtributo` es el nombre que se asigna al método, que usaremos para acceder al atributo encapsulado, y que deberá coincidir con el nombre del atributo. Al usar camelCase, ahora se usará la palabra `get` o `set` (en minúscula) seguido del nombre del atributo empezando ahora por mayúscula.
+
+{{ Explicar que los booleanos son isNombreAtributo }}
 
 Por ejemplo, para encapsular el atributo potencia en la clase Coche, y proporcionar un acceso controlado al mismo a través de los getter y setter, deberíamos escribir el siguiente código:
 
@@ -659,7 +661,57 @@ Mezclando las capacidades de la herencia, las clases abstractas y las interfaces
 
 
 
+# Miembros estáticos
 
+En Java, **los métodos y atributos estáticos son aquellos que pertenecen a la clase en sí y no a un objeto de esa clase**. Es decir, se pueden invocar o acceder a ellos sin tener que crear un objeto de la clase.
 
+La utilidad de los métodos y atributos estáticos es que permiten acceder a información o funcionalidades que son comunes para todos los objetos de una clase, sin necesidad de crear un objeto específico. Esto puede ser útil para acceder a constantes, métodos de utilidad, entre otros, que no dependen de un objeto particular.
 
+Veamos como la clase `Math` utiliza sus métodos y atributos estáticos:
 
+```java
+public class Main {
+  public static void main(String[] args) {
+    double radio = 5;
+    double area = Math.PI * Math.pow(radio, 2);
+    System.out.println("El área del círculo es " + area);
+  }
+}
+
+```
+
+Se puede ver que no hemos necesitado instanciar un objeto de la clase `Math` para poder usar el atributo  `Math.PI` y el método `Math.pow()` para calcular el área. **Ambos son estáticos**. Para hacer referencia a ellos, tan solo hay que poner el nombre de la clase, un punto y el nombre del miembro.
+
+Para definir un atributo o método como estático, tan solo debemos anteponer la palabra `static` después del modificador de acceso en la definición del mismo.
+
+Ahora veremos como se definen en Java los atributos o métodos estáticos:
+
+```java
+// Clase Color.java
+public class Color {
+    public static final String RESET = "\033[0m";
+    public static final String BLACK = "\033[0;30m";
+    public static final String RED = "\033[0;31m";
+    public static final String GREEN = "\033[0;32m";
+    public static final String YELLOW = "\033[0;33m";
+    public static final String BLUE = "\033[0;34m";
+    public static final String PURPLE = "\033[0;35m";
+    public static final String CYAN = "\033[0;36m";
+    public static final String WHITE = "\033[0;37m";
+}
+```
+
+```java
+// Clase Main.java
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(Color.RED + "Este texto es rojo" + Color.RESET);
+        System.out.println(Color.GREEN + "Este texto es verde" + Color.RESET);
+        System.out.println(Color.BLUE + "Este texto es azul" + Color.RESET);
+    }
+}
+```
+
+En el ejemplo estamos usando las constantes que hemos definido en la clase `Color`, sin tener que instanciar un objeto de la clase `Color`.
+
+En resumen, los métodos y atributos estáticos en Java son útiles para proporcionar información y funcionalidades comunes a todos los objetos de una clase sin necesidad de crear un objeto específico.
