@@ -45,11 +45,11 @@ Todas las colecciones poseen unas operaciones básicas comunes. Después cada co
 - Borrar un objeto de la colección. Se realiza con el método <kbd>remove</kbd>. 
 - Obtener el tamaño de la colección. Se realiza con el método <kbd>size</kbd>.
 - Comprobar si un objeto se encuentra en la colección. Se realiza con el método <kbd>contains</kbd>.
-- Comprobar su una colección está vacía. Se realiza con el método <kbd>isEmpty</kbd>.
+- Comprobar si una colección está vacía. Se realiza con el método <kbd>isEmpty</kbd>.
 - Obtener un elemento de la colección. Se realiza con el método <kbd>get</kbd>.
 - Eliminar todos los elementos de la colección. Se realiza con el método <kbd>clear</kbd>.
 
-Cada colección sobrescribirá sus propios métodos, adaptándolos a sus necesidades, pudiendo existir diferencias entre una colección y otra, por lo que siempre consultaremos la documentación de los mismos, para comprobar que hace cada método, sus valores devueltos, posibles excepciones lanzadas, etc.
+Cada colección sobrescribirá sus propios métodos, adaptándolos a sus necesidades, pudiendo existir diferencias entre una colección y otra, **por lo que siempre consultaremos la documentación de los mismos,** para comprobar que hace cada método, sus valores devueltos, posibles excepciones lanzadas, etc.
 
 ## Bucle FOR EACH
 
@@ -118,7 +118,7 @@ Cada vez que insertamos un elemento con `add(objeto)`, este se posiciona al fina
 Para acceder a los elementos de la lista, usaremos el método <kbd>get</kbd>, el cual recibe un entero que representa el índice (posición) del elemento dentro del ArrayList. Sus índices empiezan en 0, igual que los arrays.
 
 ```java
-System.out.println(lista.get(2)); // Clint
+System.out.println(lista.get(2)); // Thanos
 ```
 
 Para borrar los elementos, podemos hacerlo de dos formas, gracias a la sobrecarga del método `remove()`
@@ -127,12 +127,12 @@ Para borrar los elementos, podemos hacerlo de dos formas, gracias a la sobrecarg
 // Borramos por índice
 lista.remove(2); // Borraría a Thanos
 // Borramos por objeto
-lista.remove("Natasha"); // Borraría a Natasha. Da igual en que posición estuviese
+lista.remove("Natasha"); // Borraría a la primera "Natasha". Da igual en que posición estuviese
 // Borramos todo
 lista.clear(); // Borra a todos los elementos
 ```
 
-La colección List, posee todos los métodos comunes que hemos descrito con anterioridad, como `contains`, `isEmpty`, `clear`, `remove`, etc. Lo mejor siempre para comprobar los métodos de una colección será crear el objeto y escribir su nombre  y un punto para que el IDE nos muestre la lista de todos los métodos disponibles, así como la documentación de como usarlos.
+La colección List, posee todos los métodos comunes que hemos descrito con anterioridad, como `contains`, `isEmpty`, `clear`, `remove`, etc. Lo mejor siempre para comprobar los métodos de una colección será crear el objeto y escribir su nombre y un punto para que el IDE nos muestre la lista de todos los métodos disponibles, así como la documentación de como usarlos.
 
 
 
@@ -222,19 +222,19 @@ public class Persona implements Comparable<Persona> {
     ...
     @Override
     public int compareTo(Persona otraPersona) {
-        return this.edad - otraPersona.edad;
+        return this.edad - otraPersona.getEdad();
     }
 }
 
 ```
 
-Al restar las edades, ya tenemos justo los valores que queremos. 
+Al restar las edades, ya tenemos justo los valores que queremos.
 
-- Si ESTA clase es menor que la recibida por parámetros, nos dará un número negativo (da igual cual). 
-- Si ESTA clase es mayor que la recibida por parámetros, dará un número positivo. 
-- Y si tienen las mismas edades, el resultado será 0. 
+- Si ESTA clase es menor que la recibida por parámetros, nos dará un número negativo (da igual cual).
+- Si ESTA clase es mayor que la recibida por parámetros, dará un número positivo.
+- Y si tienen las mismas edades, el resultado será 0.
 
-De esta forma, el TreeSet podrá comparar los objetos entre si y saber el orden (que hemos decidido nosotros) para insertar los elementos en unas posiciones u otras, o bien no insertarlos porque son iguales. 
+De esta forma, el TreeSet podrá comparar los objetos entre si y saber el orden (que hemos decidido nosotros) para insertar los elementos en unas posiciones u otras, o bien no insertarlos porque son iguales.
 
 > ⚠ `TreeSet` para comprobar la igualdad de dos objetos no usa el `.equals()` ni el `hashcode()`, si no el `compareTo()`. Por lo que hay que tener en cuenta que dos personas distintas, con distintos nombres PERO CON LA MISMA EDAD, el TreeSet entendería que son iguales, por lo que no la insertaría en la colección. 
 
