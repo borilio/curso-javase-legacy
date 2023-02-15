@@ -18,7 +18,7 @@ Las excepciones más comunes en Java son:
 2. **Dividir por cero**: Una operación matemática que intenta dividir por cero lanzará una excepción de `ArithmeticException`.
 3. **Referencia a `null`**: Intentar acceder a un objeto nulo puede provocar una `NullPointerException`.
 4. **Tipos incompatibles**: Intentar asignar un objeto a una variable que no es compatible con su tipo puede provocar una `ClassCastException`.
-5. **Índices fuera de rango**: Intentar acceder a un elemento en un array o una lista fuera de sus límites puede provocar una `ArrayIndexOutOfBoundsException`. También una referencia a una posición fuera de los límites de una cadena provocaría un `StringIndexOutOfBoundsException`.
+5. **Índices fuera de rango**: Intentar acceder a un elemento en un array o una colección fuera de sus límites puede provocar una `ArrayIndexOutOfBoundsException`. También una referencia a una posición fuera de los límites de una cadena provocaría un `StringIndexOutOfBoundsException`.
 6. **Conversión de tipos inválida:** Intentar convertir un tipo de datos a otro que no es compatible puede provocar una `NumberFormatException`.
 7. **Excepciones con bases de datos SQL**: Provocan una excepción del tipo `SQLException`. Este tipo de excepción se produce cuando hay un problema con una base de datos, como un error en la conexión o una consulta mal formada.
 8. **Error de sintaxis:** Un error de sintaxis en el código fuente, como una falta de paréntesis o una declaración inválida, puede provocar una `SyntaxError` o una `CompilationException`.
@@ -38,7 +38,8 @@ Un ejemplo de excepción unchecked es la que se produce cuando el usuario debe i
 ```java
 Scanner scanner = new Scanner(System.in);
 System.out.print("Introduce un número: ");
-scanner.nextDouble(); // El usuario introduce el texto "No quiero", en lugar de un número
+double numero = scanner.nextDouble(); // El usuario introduce el texto "No quiero", en lugar de un número
+System.out.println(numero); // Nunca llegaría a ejecutarse esta línea
 ```
 
 ![image-20230211180622450](img/05-Excepciones/image-20230211180622450-1676135197382-1.png)
@@ -86,7 +87,7 @@ try {
 } catch (Exception e) {
     // Bloque que se ejecutará cuando se produzca una excepción
 } finally {
-    // Bloque que se ejecutará SIEMPRE
+    // Bloque opcional que se ejecutará SIEMPRE
 }
 ...
 ```
@@ -116,9 +117,9 @@ Sin usar un bloque `try-catch`, el intentar acceder a la posición 5 del array p
 
 ### Bloque Finally
 
-El bloque `finally` es una sección opcional en un `try-catch` que se ejecuta después de que se haya ejecutado el bloque `try` y cualquier bloque `catch` correspondiente. 
+El bloque `finally` es una sección opcional en un `try-catch` que se ejecuta después de que se haya ejecutado el bloque `try` y cualquier bloque `catch` correspondiente.
 
-Es útil para realizar tareas de limpieza o cierre, como cerrar recursos abiertos o liberar recursos, independientemente de si se ha producido una excepción o no. 
+Es útil para realizar tareas de limpieza o cierre, como cerrar recursos abiertos o liberar recursos, independientemente de si se ha producido una excepción o no.
 
 Por ejemplo, si abres un archivo en un bloque `try`, puedes cerrarlo en el bloque `finally` para garantizar que se cierra siempre, incluso si se produce una excepción.
 
@@ -126,12 +127,12 @@ Por ejemplo, si abres un archivo en un bloque `try`, puedes cerrarlo en el bloqu
 public class Main {
 	public static void main(String[] args) {
 		try {
-			int result = 10 / 2;
+			int result = 10 / 0;
 			System.out.println("El resultado es: " + result);
 		} catch (ArithmeticException e) {
 			System.out.println("No se puede dividir por cero");
 		} finally {
-			System.out.println("Este mensaje se imprimirá siempre, independientemente de si hubo una 	excepción o no.");
+			System.out.println("Este mensaje se imprimirá siempre, independientemente de si hubo una excepción o no.");
 		}
 	}
 }
