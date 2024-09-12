@@ -1,3 +1,7 @@
+> [!CAUTION]
+> Este repositorio ha sido archivado como solo lectura. Es una versión antigua. Podrás encontrar una versión nueva de la documentación en
+> https://github.com/borilio/curso-javase
+
 # Formación Java Standard Edition
 
 ## Temario
